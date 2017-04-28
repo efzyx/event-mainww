@@ -1,0 +1,33 @@
+<% if @event.is_open %>
+<%= form_for(@event, remote: false, data: { confirm: "Yakin tutup pendaftaran?"}) do |fa| %>
+  <%= fa.hidden_field :id, :value => @event.id %>
+  <%= fa.submit "Tutup Pendaftaran", class: "btn btn-warning pull-right" %>
+<% end %>
+<% else %>
+<%= form_for(@event, remote: false, data: { confirm: "Yakin buka pendaftaran?"}) do |fa| %>
+  <%= fa.hidden_field :id, :value => @event.id %>
+  <%= fa.submit "Buka Pendaftaran", class: "btn btn-warning pull-right" %>
+<% end %>
+<% end %>
+<hr>
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <i class="fa fa-text-width"></i>
+
+        <h3 class="box-title">Info Event</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <dl class="dl-horizontal">
+          <dt>Nama Event</dt>
+          <dd><%= @event.nama_event %></dd>
+          <dt>Deskripsi</dt>
+          <dd>
+            <%= simple_format(@event.deskripsi) %>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

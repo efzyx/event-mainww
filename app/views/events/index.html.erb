@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <td>#</td>
+              <td>Title Event</td>
+              <td>Pendaftaran</td>
+              <td>Aksi</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% nomor = 1 %>
+            <% @events.each do |e| %>
+            <tr>
+              <td><%= nomor %></td>
+              <td><%= e.nama_event %></td>
+              <td><%= e.is_open == true ? '<span class="label label-primary">Open</span>'.html_safe : '<span class="label label-danger">Closed</span>'.html_safe %></td>
+              <td>
+                <%= link_to 'Join Event', new_event_participant_path(e), class: 'btn btn-primary' %>
+                &emsp;
+                <%= link_to 'Info', event_path(e), class: 'btn btn-info' %>
+                </td>
+            </tr>
+            <% nomor+=1 %>
+            <% end %>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>

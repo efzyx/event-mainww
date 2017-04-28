@@ -47,3 +47,10 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+source "http://insecure.rails-assets.org" do
+  gem "rails-assets-adminlte"
+end
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+gem 'devise'
+gem 'icheck-rails'

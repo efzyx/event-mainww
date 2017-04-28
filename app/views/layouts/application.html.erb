@@ -1,14 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>EventMainww</title>
-    <%= csrf_meta_tags %>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Event</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
+<body class="hold-transition skin-purple layout-top-nav">
+<div class="wrapper">
+<%= render 'layouts/header' %>
+  <div class="content-wrapper">
+    <div class="container">
+      <section class="content-header">
+        <h1>
+          <%= @aksi %>
+          <small><%= @objek %></small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to @objek, @url %></li>
+          <li class="active"><%= @aksi %></li>
+        </ol>
+      </section>
+      <section class="content">
+        <%= yield %>
+      </section>
+    </div>
+  </div>
+  <%= render 'layouts/footer' %>
+</div>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+  <%= javascript_include_tag 'application' %>
+  <script type="text/javascript">
+    // $(function(){
+    //   //iCheck for checkbox and radio inputs
+    //   $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+    //     checkboxClass: 'icheckbox_minimal-blue',
+    //     radioClass: 'iradio_minimal-blue'
+    //   });
+    //   //Red color scheme for iCheck
+    //   $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+    //     checkboxClass: 'icheckbox_minimal-red',
+    //     radioClass: 'iradio_minimal-red'
+    //   });
+    //   //Flat red color scheme for iCheck
+    //   $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+    //     checkboxClass: 'icheckbox_flat-green',
+    //     radioClass: 'iradio_flat-green'
+    //   });
+    // });
+  </script>
+</body>
 </html>

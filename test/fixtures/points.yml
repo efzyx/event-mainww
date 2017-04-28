@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team: one
+  nilai: 1
+  keterangan: MyText
+  oleh: MyString
+
+two:
+  team: two
+  nilai: 1
+  keterangan: MyText
+  oleh: MyString
