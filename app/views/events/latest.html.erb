@@ -46,8 +46,11 @@
     <!-- small box -->
     <div class="small-box bg-green">
       <div class="inner">
+        <% if Team.where(event_id: @event.id).nil? %>
         <h3><%= Team.where(event_id: @event.id).count %></h3>
-
+        <% else %>
+        <h3>0</h3>
+        <% end %>
         <p>Tim</p>
       </div>
       <a href="<%= event_teams_path(@event) %>" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
@@ -58,6 +61,7 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
       <div class="inner">
+        <% if Team.where(event_id: @event.id).nil? %>
         <h3><%
         @tinggi = 0
         @tim = nil
@@ -70,9 +74,13 @@
           end
         end
           %>
+          
           <%= @tim.title %>
         
         </h3>
+        <% else %>
+        <h3>Belum Ada</h3>
+        <% end %>
 
         <p>Tim Unggul</p>
       </div>
