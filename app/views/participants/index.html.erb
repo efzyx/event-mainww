@@ -1,3 +1,7 @@
+<% @url = '' %>
+<% @aksi = "List" %>
+<% @objek = "Peserta" %>
+
 <% if flash[:notice] %>
 <div class="callout callout-info">
   <p><%= flash[:notice] %></p>
@@ -12,6 +16,7 @@
 
 <div class="row">
   <div class="col-xs-12">
+    <%= link_to 'Gabung Event', new_event_participant_path(@event), class: 'btn btn-primary pull-right' %> <hr>
     <div class="box">
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">

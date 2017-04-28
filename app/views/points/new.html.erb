@@ -1,6 +1,6 @@
-<% @url = '' %>
+<% @url = event_team_points_path(@event, @team) %>
 <% @aksi = "Tambah" %>
-<% @objek = "Tim" %>
+<% @objek = "Point" %>
 <% if flash[:notice] %>
 <div class="callout callout-info">
   <p><%= flash[:notice] %></p>

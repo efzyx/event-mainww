@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user! , except: [:index, :show]
+  before_action :authenticate_user! , except: [:index, :show, :latest]
   def index
     @events = Event.all.order(id: :asc)
   end
@@ -54,6 +54,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:nama_event, :is_open, :deskripsi)
+    params.require(:event).permit(:nama_event, :is_open, :deskripsi, :is_tim)
   end
 end

@@ -1,15 +1,87 @@
-<% if @event.is_open %>
-<%= form_for(@event, remote: false, data: { confirm: "Yakin tutup pendaftaran?"}) do |fa| %>
-  <%= fa.hidden_field :id, :value => @event.id %>
-  <%= fa.submit "Tutup Pendaftaran", class: "btn btn-warning pull-right" %>
+<% @url = '' %>
+<% @aksi = "List" %>
+<% @objek = "Event" %>
+<% if flash[:notice] %>
+<div class="callout callout-info">
+  <p><%= flash[:notice] %></p>
+</div>
 <% end %>
-<% else %>
-<%= form_for(@event, remote: false, data: { confirm: "Yakin buka pendaftaran?"}) do |fa| %>
-  <%= fa.hidden_field :id, :value => @event.id %>
-  <%= fa.submit "Buka Pendaftaran", class: "btn btn-warning pull-right" %>
+
+<% if flash[:warning] %>
+<div class="callout callout-danger">
+  <p><%= flash[:warning] %></p>
+</div>
 <% end %>
-<% end %>
+
+<%= link_to 'Tambah Event', new_event_path, class: 'btn btn-primary pull-right' %>
+<% if !@event.nil? %>
+  <% if @event.is_open %>
+  <%= form_for(@event, remote: false, data: { confirm: "Yakin tutup pendaftaran?"}) do |fa| %>
+    <%= fa.hidden_field :id, :value => @event.id %>
+    <%= fa.submit "Tutup Pendaftaran", class: "btn btn-warning pull-left" %>
+  <% end %>
+  <% else %>
+  <%= form_for(@event, remote: false, data: { confirm: "Yakin buka pendaftaran?"}) do |fa| %>
+    <%= fa.hidden_field :id, :value => @event.id %>
+    <%= fa.submit "Buka Pendaftaran", class: "btn btn-warning pull-left" %>
+  <% end %>
+  <% end %>
+
 <hr>
+<hr>
+<div class="row">
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3><%= Participant.where(event_id: @event.id).count %></h3>
+
+        <p>Peserta</p>
+      </div>
+      <a href="<%= event_participants_path(@event) %>" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3><%= Team.where(event_id: @event.id).count %></h3>
+
+        <p>Tim</p>
+      </div>
+      <a href="<%= event_teams_path(@event) %>" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3><%
+        @tinggi = 0
+        @tim = nil
+        Team.all.each do |t|
+  
+          @p = Point.where(team_id: t).sum(:nilai)
+          if @p > @tinggi
+            @tim = t
+            @tinggi = @p
+          end
+        end
+          %>
+          <%= @tim.title %>
+        
+        </h3>
+
+        <p>Tim Unggul</p>
+      </div>
+      <a href="<%= event_team_points_path(@event, @tim) %>" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  
+  
   <div class="col-md-12">
     <div class="box box-solid">
       <div class="box-header with-border">
@@ -27,7 +99,16 @@
             <%= simple_format(@event.deskripsi) %>
           </dd>
         </dl>
+        <hr>
+      <%= link_to 'Lihat Peserta', event_participants_path(@event), class: 'btn btn-primary pull-left' %>
+      <%= link_to 'Lihat Tim', event_teams_path(@event), class: 'btn btn-primary pull-right' %>
       </div>
     </div>
   </div>
 </div>
+<% else %>
+
+<div class="callout callout-danger">
+  <p>Tidak ada event terbaru.</p>
+</div>
+<% end %>

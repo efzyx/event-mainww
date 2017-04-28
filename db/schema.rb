@@ -12,17 +12,21 @@
 
 ActiveRecord::Schema.define(version: 20170428041958) do
 
-  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
     t.string   "nama_event"
     t.boolean  "is_open"
-    t.text     "deskripsi",  limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.boolean  "is_tim"
+    t.text     "deskripsi"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "participants", force: :cascade do |t|
     t.string   "display_name"
-    t.string   "tele_username", unique: true
+    t.string   "tele_username"
     t.integer  "event_id"
     t.integer  "team_id"
     t.datetime "created_at",    null: false
@@ -31,26 +35,26 @@ ActiveRecord::Schema.define(version: 20170428041958) do
     t.index ["team_id"], name: "index_participants_on_team_id", using: :btree
   end
 
-  create_table "points", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "points", force: :cascade do |t|
     t.integer  "team_id"
     t.integer  "nilai"
-    t.text     "keterangan", limit: 65535
+    t.text     "keterangan"
     t.string   "oleh"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_points_on_team_id", using: :btree
   end
 
-  create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "teams", force: :cascade do |t|
     t.string   "title"
     t.integer  "event_id"
-    t.text     "deskripsi",  limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "deskripsi"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_teams_on_event_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

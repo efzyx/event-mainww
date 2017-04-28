@@ -11,17 +11,22 @@ class ParticipantsController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
-    @participant = Participant.new(participant_params)
-    if Participant.where(event_id: params[:participant][:event_id], tele_username: params[:participant][:tele_username]).empty?
-      if @participant.save
-        redirect_to event_participants_path(@event), notice: 'Peserta berhasil disimpan'
+    if @event.is_open
+      @participant = Participant.new(participant_params)
+      if Participant.where(event_id: params[:participant][:event_id], tele_username: params[:participant][:tele_username]).empty?
+        if @participant.save
+          redirect_to event_participants_path(@event), notice: 'Peserta berhasil disimpan'
+        else
+          render :new
+          flash[:warning] = 'Gagal simpan, periksa kembali'
+        end
       else
+        flash[:warning] = 'Username yang diinputkan sudah terdaftar'
         render :new
-        flash[:warning] = 'Gagal simpan, periksa kembali'
       end
     else
-      flash[:warning] = 'Username yang diinputkan sudah terdaftar'
-      render :new
+      flash[:warning] = 'Pendaftaran ditutup'
+      redirect_to root_path
     end
   end
 
