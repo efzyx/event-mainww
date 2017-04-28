@@ -83,8 +83,12 @@
           end
         end
           %>
-          
-          <%= @tim.title %>
+          <%if !@tim.nil? %>
+            <%= @tim.title %>
+          <% else %>
+          Belum Ada
+          <% @ada = false %>
+          <% end %>
         
         </h3>
         <% else %>

@@ -34,6 +34,7 @@
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
+        
         <h3><%= Participant.where(event_id: @event.id).count %></h3>
 
         <p>Peserta</p>
@@ -46,11 +47,20 @@
     <!-- small box -->
     <div class="small-box bg-green">
       <div class="inner">
+        <% @ada = false %>
+        <% if !Team.where(event_id: @event.id).empty? %>
         <h3><%= Team.where(event_id: @event.id).count %></h3>
-
+        <% @ada = true %>
+        <% else %>
+        <h3>0</h3>
+        <% end %>
         <p>Tim</p>
       </div>
+      <% if @ada %>
       <a href="<%= event_teams_path(@event) %>" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+      <% else %>
+       <a href="#" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+      <% end %>
     </div>
   </div>
   <!-- ./col -->
@@ -58,9 +68,12 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
       <div class="inner">
+        
+        <% if !Team.where(event_id: @event.id).empty? %>
         <h3><%
         @tinggi = 0
         @tim = nil
+        @ada = true
         Team.all.each do |t|
   
           @p = Point.where(team_id: t).sum(:nilai)
@@ -70,13 +83,25 @@
           end
         end
           %>
-          <%= @tim.title %>
+          <%if !@tim.nil? %>
+            <%= @tim.title %>
+          <% else %>
+          Belum Ada
+          <% @ada = false %>
+          <% end %>
         
         </h3>
+        <% else %>
+        <h3>Belum Ada</h3>
+        <% end %>
 
         <p>Tim Unggul</p>
       </div>
+      <% if @ada %>
       <a href="<%= event_team_points_path(@event, @tim) %>" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+      <% else %>
+       <a href="#" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+      <% end %>
     </div>
   </div>
   <!-- ./col -->
