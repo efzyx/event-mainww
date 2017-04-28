@@ -48,7 +48,7 @@
     <div class="small-box bg-green">
       <div class="inner">
         <% @ada = false %>
-        <% if !Team.where(event_id: @event.id).nil? %>
+        <% if !Team.where(event_id: @event.id).empty? %>
         <h3><%= Team.where(event_id: @event.id).count %></h3>
         <% @ada = true %>
         <% else %>
@@ -69,7 +69,7 @@
     <div class="small-box bg-yellow">
       <div class="inner">
         
-        <% if !Team.where(event_id: @event.id).nil? %>
+        <% if !Team.where(event_id: @event.id).empty? %>
         <h3><%
         @tinggi = 0
         @tim = nil
