@@ -13,7 +13,7 @@
 </div>
 <% end %>
 
-
+<%= link_to 'Input Poin', input_path(@event), class: 'btn btn-primary pull-right' %>
 <% if !@event.nil? %>
   <% if @event.is_open %>
   <%= form_for(@event, remote: false, data: { confirm: "Yakin tutup pendaftaran?"}) do |fa| %>

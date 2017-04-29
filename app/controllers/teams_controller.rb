@@ -33,7 +33,21 @@ class TeamsController < ApplicationController
   #   @team = Team.where(event_id: @event.id).order(id: :asc)
   #
   # end
-
+  def input
+    @event = Event.find(params[:format])
+    @team = Team.where(event_id: @event.id).order(id: :asc)
+    @participant = Participant.where(event_id: @event.id)
+    
+    @peserta = Array.new
+    @index = 0
+    @team.each do |t|
+      @p = Point.where(team_id: t.id).sum(:nilai)
+      @peserta[@index] = [t, @p]
+      @index += 1
+    end
+     @peserta = @peserta.sort_by{|p| -p[1]}
+  end
+  
   def new
     @event = Event.find(params[:event_id])
     @team = Team.new

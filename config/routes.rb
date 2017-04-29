@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   # post 'events/pendaftaran'
   get 'events/latest'
+  get 'input' , to: 'teams#input'
   root to: 'events#latest'
 
 
