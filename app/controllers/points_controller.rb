@@ -3,7 +3,7 @@ class PointsController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
     @team = Team.find(params[:team_id])
-    @point = Point.where(team_id: @team.id)
+    @point = Point.where(team_id: @team.id).order(id: :desc)
   end
 
   def new

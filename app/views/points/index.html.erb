@@ -25,6 +25,7 @@
             <tr>
               <td>#</td>
               <td>Nilai</td>
+              <td>Waktu</td>
               <td>Keterangan</td>
               <td>Ditambahkan Oleh</td>
             </tr>
@@ -37,6 +38,7 @@
             <tr>
               <td><%= nomor %></td>
               <td><%= p.nilai %></td>
+              <td><%= p.created_at.in_time_zone("Jakarta").strftime("%d/%m/%Y %H:%M:%S") %></td>
               <td><%= p.keterangan %></td>
               <td><%= p.oleh %></td>
             </tr>
@@ -47,7 +49,7 @@
           <tfoot>
             <tr>
               <td>Jumlah</td>
-              <td colspan="3"><%= jumlah %></td>
+              <td colspan="4"><%= jumlah %></td>
             </tr>
           </tfoot>
         </table>
