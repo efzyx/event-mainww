@@ -40,7 +40,7 @@
               <td><%= p.nilai %></td>
               <td><%= p.created_at.in_time_zone("Jakarta").strftime("%d/%m/%Y %H:%M:%S") %></td>
               <td><%= p.keterangan %></td>
-              <td><%= p.oleh %></td>
+              <td><%= p.oleh.split("@").first %></td>
             </tr>
             <% nomor+=1 %>
             <% jumlah+=p.nilai %>
