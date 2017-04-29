@@ -41,7 +41,7 @@
                
                 <% no = 1 %>
                 <% @participant.where(team_id: t[0].id).each do |p| %>
-                <%=no %><%=". "%><%= p.tele_username %> <br>
+                <%=no %><%=". "%><%= p.display_name %> <br>
                 <% no += 1 %>
                 <% end %>
                  <%= link_to 'Tambah', event_team_participant_teams_new_path(@event, t[0]), class: 'btn btn-primary' %>
