@@ -4,6 +4,28 @@ class TeamsController < ApplicationController
     @event = Event.find(params[:event_id])
     @team = Team.where(event_id: @event.id).order(id: :asc)
     @participant = Participant.where(event_id: @event.id)
+    
+    @peserta = Array.new
+    @index = 0
+    @team.each do |t|
+      @p = Point.where(team_id: t.id).sum(:nilai)
+      # if @peserta.empty?
+        @peserta[@index] = [t, @p]
+        @index += 1
+      # else
+        # @peserta.each_with_index do |pes, i|
+        #   if @p > @peserta[i][1]
+        #     @psr = @peserta[i]
+        #     @peserta[i] = [t, @p]
+        #     @p = @psr[1]
+        #     @peserta[i+1]=@psr
+        #   end
+        # end
+      # end
+      
+    end
+    
+    @peserta = @peserta.sort_by{|p| -p[1]}
   end
 
   # def participant

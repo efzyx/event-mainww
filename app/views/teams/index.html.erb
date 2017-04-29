@@ -16,13 +16,14 @@
 
 <div class="row">
   <div class="col-xs-12">
+    <%= link_to 'Kembali', event_path(@event), class: 'btn btn-danger pull-left' %>
     <%= link_to 'Tambah Tim', new_event_team_path(@event), class: 'btn btn-primary pull-right' %><hr>
     <div class="box">
       <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
           <thead>
             <tr>
-              <td>#</td>
+              <td>Peringkat</td>
               <td>Nama Tim</td>
               <td>Anggota</td>
               <td>Point</td>
@@ -32,26 +33,26 @@
           <tbody>
 
             <% nomor = 1 %>
-            <% @team.each do |t| %>
+            <% @peserta.each do |t| %>
             <tr>
               <td><%= nomor %></td>
-              <td><%= t.title %></td>
+              <td><%= t[0].title %></td>
               <td>
                
                 <% no = 1 %>
-                <% @participant.where(team_id: t.id).each do |p| %>
+                <% @participant.where(team_id: t[0].id).each do |p| %>
                 <%=no %><%=". "%><%= p.tele_username %> <br>
                 <% no += 1 %>
                 <% end %>
-                 <%= link_to 'Tambah', event_team_participant_teams_new_path(@event, t), class: 'btn btn-primary' %>
+                 <%= link_to 'Tambah', event_team_participant_teams_new_path(@event, t[0]), class: 'btn btn-primary' %>
               </td>
               <td>
                 
-                <%= Point.where(team_id: t).sum(:nilai) %><br>
-                <%= link_to 'Riwayat', event_team_points_path(@event, t), class: 'btn btn-primary' %>
+                <%= t[1] %><br>
+                <%= link_to 'Riwayat', event_team_points_path(@event, t[0]), class: 'btn btn-primary' %>
                 
               </td>
-              <td><%= t.deskripsi %></td>
+              <td><%= t[0].deskripsi %></td>
             </tr>
             <% nomor+=1 %>
             <% end %>
