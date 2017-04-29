@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user! , except: [:index]
+  before_action :authenticate_user! , except: [:index, :input]
   def index
     @event = Event.find(params[:event_id])
     @team = Team.where(event_id: @event.id).order(id: :asc)
